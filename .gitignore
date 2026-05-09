@@ -1,0 +1,23 @@
+# Build output
+dist/
+.output/
+
+# Node
+node_modules/
+
+# Astro
+.astro/
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# Editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

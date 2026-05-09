@@ -1,0 +1,56 @@
+# deploy.yml
+# Deploys the site to Cloudflare Pages on push to main.
+# Pull requests get automatic preview deployments.
+#
+# Required GitHub secrets:
+#   CLOUDFLARE_API_TOKEN  — Cloudflare API token with Pages write permission
+#   CLOUDFLARE_ACCOUNT_ID — Your Cloudflare account ID (Overview page, right sidebar)
+#
+# One-time setup: create a Cloudflare Pages project named "cleantest-1778334475-site"
+# before the first deploy (dashboard or `npx wrangler pages project create cleantest-1778334475-site`).
+
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+      pull-requests: write   # allows the action to post preview URL comments on PRs
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: cleantest-1778334475-site
+          directory: dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          # Pushes to main deploy to production.
+          # All other branches (including PR heads) deploy as previews.
