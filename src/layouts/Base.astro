@@ -1,0 +1,43 @@
+---
+// Base.astro — shared HTML shell for all pages
+// TODO before launch:
+//   - Replace placeholder <title> and <meta description>
+//   - Add real og:image once brand assets exist
+//   - Replace placeholder siteUrl with the live domain
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'CleanTest — [PLACEHOLDER: Short tagline, ≤10 words]',
+  description = '[PLACEHOLDER: One sentence that describes CleanTest for search engines and social sharing.]',
+} = Astro.props;
+
+// TODO: Replace with real domain before first prod deploy
+const siteUrl = import.meta.env.SITE ?? 'https://cleantest.example.com';
+---
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <!-- TODO: Add og:image once brand hero asset is ready -->
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>{title}</title>
+  </head>
+  <body class="bg-white text-gray-900 antialiased font-sans">
+    <slot />
+  </body>
+</html>

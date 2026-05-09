@@ -1,0 +1,33 @@
+/*
+  brand-tokens.css
+  ----------------
+  PLACEHOLDER PALETTE — neutral greys/whites/blacks for v0.
+  Graphic Designer to replace this entire file with the brand palette in v1.
+
+  When replacing:
+  - Update --color-brand-* custom properties
+  - Add any additional semantic tokens (--color-brand-success, etc.)
+  - Update font-family tokens if the brand uses custom typefaces
+*/
+
+:root {
+  /* Backgrounds */
+  --color-brand-surface:     #ffffff;
+  --color-brand-surface-alt: #f9f9f9;
+  --color-brand-muted:       #f3f3f3;
+
+  /* Text */
+  --color-brand-text:        #111111;
+  --color-brand-text-muted:  #6b7280;
+
+  /* Borders */
+  --color-brand-border:      #e5e5e5;
+
+  /* Actions — placeholder near-black */
+  --color-brand-primary:     #111111;
+  --color-brand-primary-hover: #333333;
+
+  /* Typography — Graphic Designer to specify typefaces */
+  --font-brand-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-brand-display: ui-sans-serif, system-ui, sans-serif;
+}
